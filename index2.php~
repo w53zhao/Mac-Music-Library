@@ -1,0 +1,42 @@
+
+<!--____________________generates top section of template____________________-->
+
+<?php
+include("top_section_template.html")
+?>
+
+<!--____________________left main section ____________________-->
+	
+	<div id="body">
+		<div id="left">
+			<div id="welcome">
+				<h2 class="guilded"><span>Welcome</span></h2>
+				<p>The Mac Music Library was created to help the Music Department keep track of all the musical scores that it owns.</p>
+				<p>Students can use this website to browse the musical catalogue when they have music projects, such as a score analysis.</p>
+				<p>We hope that this will become useful to the Music Department.</p>
+				<p>&nbsp;</p>
+			</div>
+      		</div>
+
+<!--____________________right main section____________________-->
+
+		<div id="right">
+			<div id="login">
+				<h2>Login</h2>
+				<form action="index.php" method="get">
+					<table border="0" cellspacing="2" cellpadding="0">
+						<tr><th>Username</th><td><input type="text" size="15" name="username" value="" class="text" /></td></tr>
+              					<tr><th>Password</th><td><input type="password" size="15" name="password" class="text" value="" /></td></tr>
+              					<tr><td class="submission" colspan="2"><input type="image" src="images/submit-button.PNG" value="Submit"></td></tr> 
+           				</table>
+          			</form>
+        		</div>
+        	</div>	
+      	</div>
+      
+<!--____________________generates bottom section of template____________________-->
+
+<?php
+include("bottom_section_template.html")
+?>
+

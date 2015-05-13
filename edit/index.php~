@@ -1,0 +1,32 @@
+<?php
+	require_once('../include/auth.php'); //include this line to keep session
+?>
+
+<?php
+include ('top_section_template.html');
+?>
+
+
+
+<body>
+	<h1>Welcome <?php echo $_SESSION['SESS_FIRST_NAME'];?></h1>
+	<a href="../login/member-profile.php">My Profile</a> | <a href="../login/logout.php">Logout</a>
+
+<H1 align= "center">Maintaining the Mac Music Library</H1>
+<H3>Pieces</H3>
+
+<UL>
+ <LI><a href="addapiece1.php">Add a Piece</a></LI>
+ <LI><a href="editapiece1.php">Edit Piece Information</a></LI>
+ <LI><a href="deleteapiece1.php">Deleting a Piece</a></LI>
+</UL>
+<H3>Composers</H3>
+<UL>
+ <LI><a href="addacomposer1.php">Add a Composer</a></LI>
+ <LI><a href="editacomposer1.php">Editing a Composer</a></LI>
+  <LI><a href="deleteacomposer1.php">Deleting a Composer</a></LI>
+</UL>
+
+</br>
+</BODY>
+</HTML>

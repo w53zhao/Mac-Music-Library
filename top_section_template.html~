@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="style.css" type="text/css" charset="utf-8" />
+</head>
+<body>
+
+<!--____________________prints out logo____________________-->
+
+	<div id="wrapper">
+		<div id="logo">
+      			<h1>Mac Music</h1>
+     			<p>Library</p>
+		</div>
+
+<!--____________________navigation____________________-->
+
+	<div id="nav">
+		<div id="nav-left">
+			<ul>
+				<li><a href="index.php">Home</a></li>
+				<li class="orange"><a href="compositionsfull.php">Browse Library</a></li>
+			</ul>
+		</div>
+		<div id="nav-right">
+			<ul>
+				<li><a href="composersearch.php">Composer</a></li>
+				<li><a href="index.php">Add</a></li>
+				<li><a href="index.php">Edit</a></li>
+				<li><a href="credits.php">Credits</a></li>
+			</ul>
+		</div>
+	</div>
+
+

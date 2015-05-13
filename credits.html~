@@ -1,0 +1,5 @@
+<!--____________________generates top section of template____________________-->
+
+<?php
+include("top_section_template.html")
+?>

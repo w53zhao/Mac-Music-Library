@@ -1,0 +1,138 @@
+<?php
+	//Start session
+	session_start();
+
+	//Include database connection details
+	require_once('config.php');
+
+	//Array to store validation errors
+	$errmsg_arr = array();
+
+	//Validation error flag
+	$errflag = false;
+
+	//Connect to mysql server
+	$link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+	if(!$link) {
+		die('Failed to connect to server: ' . mysql_error());
+	}
+
+	//Select database
+	$db = mysql_select_db(DB_DATABASE);
+	if(!$db) {
+		die("Unable to select database");
+	}
+
+	//Function to sanitize values received from the form. Prevents SQL injection
+	function clean($str) {
+		$str = @trim($str);
+		if(get_magic_quotes_gpc()) {
+			$str = stripslashes($str);
+		}
+		return mysql_real_escape_string($str);
+	}
+
+	//Sanitize the POST values
+	$login = clean($_POST['login']);
+	$password = clean($_POST['password']);
+
+	//Input Validations
+	if($login == '') {
+		$errmsg_arr[] = 'Login ID missing';
+		$errflag = true;
+	}
+	if($password == '') {
+		$errmsg_arr[] = 'Password missing';
+		$errflag = true;
+	}
+
+	//If there are input validations, redirect back to the login form
+	if($errflag) {
+		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+		session_write_close();
+		//header("location: login-form.php");
+		exit();
+	}
+
+	//Create query
+	//$query="SELECT * FROM members WHERE login='$login' AND passwd='".md5($_POST['password'])."'";
+
+	$query="SELECT * FROM users WHERE login='$login' AND password=MD5('".$_POST['password']."') AND isactive=1";
+	$result=mysql_query($query);
+
+	//Check whether the query was successful or not
+	if($result) {
+		if(mysql_num_rows($result) == 1) {
+
+			//Login Successful
+			session_regenerate_id();
+			$user = mysql_fetch_assoc($result);
+			$_SESSION['SESS_MEMBER_ID'] = $user['id'];
+			$_SESSION['SESS_FIRST_NAME'] = $user['fname'];
+			$_SESSION['SESS_LAST_NAME'] = $user['lname'];
+			session_write_close();
+			//header("location: member-index.php");
+			header("location: ../edit");
+
+			exit();
+		}else {
+			//Login failed
+			header("location: login-failed.php");
+			exit();
+		}
+	}else {
+		die("Query failed");
+	}
+?>
+
+
+
+
+
+
+
+
+
+
+<!--____________________generates top section of template____________________-->
+
+<?php
+include("top_section_template.html")
+?>
+<title>Mac Music Library</title>
+
+<!--____________________left main section ____________________-->
+	
+	<div id="body">
+		<div id="left">
+			<div id="welcome">
+				<h2 class="guilded"><span>Welcome</span></h2>
+				<p>The Mac Music Library was created to help the Music Department keep track of all the musical scores that it owns.</p>
+				<p>Students can use this website to browse the musical catalogue when they have music projects, such as a score analysis.</p>
+				<p>We hope that this will become useful to the Music Department.</p>
+				<p>&nbsp;</p>
+			</div>
+      		</div>
+
+<!--____________________right main section____________________-->
+
+		<div id="right">
+			<div id="login">
+				<h2>Login</h2>
+				<form action="index.php" method="get">
+					<table border="0" cellspacing="2" cellpadding="0">
+						<tr><th>Username</th><td><input type="text" size="15" name="login" value="" class="text"/></td></tr>
+              					<tr><th>Password</th><td><input type="password" size="15" name="password" class="text" value="" /></td></tr>
+              					<tr><td class="submission" colspan="2"><input type="image" src="images/submit-button.PNG" value="Submit"></td></tr> 
+           				</table>
+          			</form>
+        		</div>
+        	</div>	
+      	</div>
+      
+<!--____________________generates bottom section of template____________________-->
+
+<?php
+include("bottom_section_template.html")
+?>
+
